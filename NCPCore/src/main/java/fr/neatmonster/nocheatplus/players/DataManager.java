@@ -1,6 +1,7 @@
 package fr.neatmonster.nocheatplus.players;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -387,8 +388,7 @@ public class DataManager implements Listener, INotifyReload, INeedConfig, Compon
 	 * Initializing with online players.
 	 */
 	public void onEnable(){
-		final Player[] players = Bukkit.getOnlinePlayers();
-		for (final Player player : players){
+		for (final Player player : Bukkit.getOnlinePlayers()){
 			addOnlinePlayer(player);
 		}
 	}
@@ -437,13 +437,12 @@ public class DataManager implements Listener, INotifyReload, INeedConfig, Compon
 	}
 
 	@Override
-	public void checkConsistency(final Player[] onlinePlayers) {
+	public void checkConsistency(final Collection<? extends Player> onlinePlayers) {
 		// Check online player tracking consistency.
 		int missing = 0;
 		int changed = 0;
 		int expectedSize = 0;
-		for (int i = 0; i < onlinePlayers.length; i++){
-			final Player player = onlinePlayers[i];
+		for (final Player player : onlinePlayers){
 			final String name = player.getName();
 //			if (player.isOnline()){
 				expectedSize += 1 + (name.equals(name.toLowerCase()) ? 0 : 1);

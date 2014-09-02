@@ -1,5 +1,6 @@
 package fr.neatmonster.nocheatplus.hooks;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -286,10 +287,9 @@ public class NCPExemptionManager {
      * Check Entity-id mappings, for internal use.
      * @param onlinePlayers
      */
-    public static void checkConsistency(final Player[] onlinePlayers){
+    public static void checkConsistency(final Collection<? extends Player> onlinePlayers){
     	int wrong = 0;
-    	for (int i = 0; i < onlinePlayers.length; i++){
-    		final Player player = onlinePlayers[i];
+    	for (final Player player : onlinePlayers){
     		final int id = player.getEntityId();
     		final String name = player.getName();
     		final Integer presentId = registeredPlayers.get(name);

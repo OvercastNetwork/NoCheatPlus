@@ -1,6 +1,7 @@
 package fr.neatmonster.nocheatplus.checks.chat.analysis.engine;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -127,7 +128,7 @@ public class LetterEngine implements IRemoveData, IHaveCheckType, ConsistencyChe
 	}
 
 	@Override
-	public void checkConsistency(final Player[] onlinePlayers) {
+	public void checkConsistency(final Collection<? extends Player> onlinePlayers) {
 		// Use consistency checking to release some memory.
 		final long now = System.currentTimeMillis();
 		if (now < dataMap.lastExpired){

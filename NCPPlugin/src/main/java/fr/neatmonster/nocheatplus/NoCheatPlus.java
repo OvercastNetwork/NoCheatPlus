@@ -778,7 +778,7 @@ public class NoCheatPlus extends JavaPlugin implements NoCheatPlusAPI {
                 NCPExemptionManager.getListener(),
                 new ConsistencyChecker() {
                     @Override
-                    public void checkConsistency(final Player[] onlinePlayers) {
+                    public void checkConsistency(final Collection<? extends Player> onlinePlayers) {
                         NCPExemptionManager.checkConsistency(onlinePlayers);
                     }
                 },
@@ -852,7 +852,7 @@ public class NoCheatPlus extends JavaPlugin implements NoCheatPlusAPI {
         }
 
         // Care for already online players.
-        final Player[] onlinePlayers = getServer().getOnlinePlayers();
+        final Collection<? extends Player> onlinePlayers = getServer().getOnlinePlayers();
         // TODO: re-map ExemptionManager !
         // TODO: Disable all checks for these players for one tick ?
         // TODO: Prepare check data for players [problem: permissions]?
@@ -886,7 +886,7 @@ public class NoCheatPlus extends JavaPlugin implements NoCheatPlusAPI {
     /**
      * Actions to be done after enable of  all plugins. This aims at reloading mainly.
      */
-    private void postEnable(final Player[] onlinePlayers, Runnable... runnables){
+    private void postEnable(final Collection<? extends Player> onlinePlayers, Runnable... runnables){
         LogUtil.logInfo("[NoCheatPlus] Post-enable running...");
         for (final Runnable runnable : runnables){
             try{
@@ -1159,7 +1159,7 @@ public class NoCheatPlus extends JavaPlugin implements NoCheatPlusAPI {
         }
         final long tEnd = tStart + config.getLong(ConfPaths.DATA_CONSISTENCYCHECKS_MAXTIME, 1, 50, 2);
         if (consistencyCheckerIndex >= consistencyCheckers.size()) consistencyCheckerIndex = 0;
-        final Player[] onlinePlayers = getServer().getOnlinePlayers();
+        final Collection<? extends Player> onlinePlayers = getServer().getOnlinePlayers();
         // Loop
         while (consistencyCheckerIndex < consistencyCheckers.size()){
             final ConsistencyChecker checker = consistencyCheckers.get(consistencyCheckerIndex);
